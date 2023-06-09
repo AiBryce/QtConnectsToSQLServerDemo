@@ -64,10 +64,10 @@ border: 1px solid rgb(51, 204, 204);
      </layout>
     </widget>
    </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="BtnSure">
+   <item row="2" column="3">
+    <widget class="QPushButton" name="BtnFind">
      <property name="text">
-      <string>确定</string>
+      <string>查找</string>
      </property>
     </widget>
    </item>
@@ -75,6 +75,16 @@ border: 1px solid rgb(51, 204, 204);
     <widget class="QPushButton" name="BtnCancel">
      <property name="text">
       <string>取消</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="4">
+    <widget class="QTableView" name="tableView"/>
+   </item>
+   <item row="1" column="2">
+    <widget class="QPushButton" name="BtnSure">
+     <property name="text">
+      <string>确定</string>
      </property>
     </widget>
    </item>
@@ -92,15 +102,42 @@ border: 1px solid rgb(51, 204, 204);
      </property>
     </widget>
    </item>
-   <item row="2" column="3">
-    <widget class="QPushButton" name="BtnFind">
-     <property name="text">
-      <string>查找</string>
+   <item row="3" column="0" colspan="4">
+    <widget class="QWidget" name="horizontalWidget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="lineEdit_ODBCname"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_user"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_pwd"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_table"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="conBtn">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>连接数据库并打开指定表</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
-   </item>
-   <item row="0" column="0" colspan="4">
-    <widget class="QTableView" name="tableView"/>
    </item>
   </layout>
  </widget>

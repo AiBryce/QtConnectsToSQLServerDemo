@@ -13,39 +13,12 @@ Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
+
     ui->setupUi(this);
-    //打印Qt支持的数据库驱动
-    qDebug()<<QSqlDatabase::drivers();
-    //添加Sqlite数据库
-    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-    //设置数据库
-    QString dsn = QString::fromLocal8Bit("qtcon");
-    db.setHostName("localhost");
-    db.setDatabaseName(dsn);
-    db.setUserName("qtcono");                               //登录用户
-    db.setPassword("123456");                              //密码
-    //打开数据库
-    if(!db.open())
-    {
-        QMessageBox::warning(this,"error",db.lastError().text());
-        return;
-    }
-
-    //设置模型
-    model = new QSqlTableModel(this);
-    model->setTable("产品表");//指定使用哪个表
-    //把model->放在view
-    ui->tableView->setModel(model);
-    //显示model的数据
-    model->select();
-    model->setHeaderData(0,Qt::Horizontal,"产品表");
-
-    //设置model的编辑模式，手动提交修改
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-
-    //设置view中的数学库不允许修改
-    //ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
+    ui->lineEdit_user->setPlaceholderText("数据库用户名");
+    ui->lineEdit_pwd->setPlaceholderText("用户密码");
+    ui->lineEdit_table->setPlaceholderText("打开的表名");
+    ui->lineEdit_ODBCname->setPlaceholderText("ODBC数据源名称");
 }
 
 Widget::~Widget()
@@ -89,7 +62,34 @@ void Widget::on_BtnDel_clicked()
 void Widget::on_BtnFind_clicked()
 {
     QString name = ui->lineEdit->text();
-    QString str = QString("name = '%1'").arg(name);//单引号不能忘
+    QString str = QString("数量 = '%1'").arg(name);
     model->setFilter(str);
     model->select();
+}
+
+void Widget::on_conBtn_clicked()
+{
+    db.close();
+    //载入指定驱动
+    db = QSqlDatabase::addDatabase("QODBC");
+    //设置数据库名
+    db.setHostName("localhost");
+    db.setDatabaseName(ui->lineEdit_ODBCname->text());
+    //获取数据库用户名和密码
+    db.setUserName(ui->lineEdit_user->text());
+    db.setPassword(ui->lineEdit_pwd->text());
+    //判断是否成功打开数据库
+    if(!db.open())
+    {
+        QMessageBox::warning(this,"error",db.lastError().text());
+        return;
+    }
+    //设置数据库数据读取对象
+    model = new QSqlTableModel(this);
+    //将数据置入布局
+    model->setTable(ui->lineEdit_table->text());
+    ui->tableView->setModel(model);
+    //读取内容
+    model->select();
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
 }

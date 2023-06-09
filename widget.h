@@ -15,6 +15,8 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
 
+    QSqlDatabase db;
+
 private slots:
     void on_BtnAdd_clicked();
 
@@ -25,6 +27,9 @@ private slots:
     void on_BtnDel_clicked();
 
     void on_BtnFind_clicked();
+
+
+    void on_conBtn_clicked();
 
 private:
     Ui::Widget *ui;
