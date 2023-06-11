@@ -17,7 +17,7 @@ ProductSalesManagementSystemDemo
 
 ## 1.2 程序功能
 
-本程序实现了对于数据库的增删改查，同时实现了对于数据库的连接和断开连接。
+本程序实现了对于数据库的增删改查。
 
 ## 1.3 程序开发环境
 
@@ -30,5 +30,3 @@ ProductSalesManagementSystemDemo
 - SQL Server 2019
 - Microsoft SQL Server Management Studio 18
 
-
-# 二、程序使用说明
